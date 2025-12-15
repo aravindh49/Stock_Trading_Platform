@@ -16,7 +16,13 @@ const Register = () => {
             await register(username, email, password);
             navigate('/login');
         } catch (err) {
-            setError('Registration failed');
+            console.error("Registration Error:", err);
+            const errorMessage = err.response?.data?.username?.[0] ||
+                err.response?.data?.email?.[0] ||
+                err.response?.data?.password?.[0] ||
+                err.message ||
+                'Registration failed';
+            setError(errorMessage);
         }
     };
 
