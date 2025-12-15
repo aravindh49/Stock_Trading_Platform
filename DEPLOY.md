@@ -15,7 +15,7 @@ This guide explains how to deploy the **Backend** to **Render** and the **Fronte
 3.  **Settings**:
     - **Runtime**: Python 3
     - **Build Command**: `pip install -r requirements.txt`
-    - **Start Command**: `gunicorn stock_platform.wsgi:application`
+    - **Start Command**: `./render_start.sh`
 4.  **Environment Variables**:
     - `PYTHON_VERSION`: `3.11.9`
     - `SECRET_KEY`: (Generate a random string)
