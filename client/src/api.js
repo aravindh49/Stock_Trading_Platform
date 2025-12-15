@@ -1,7 +1,15 @@
 import axios from 'axios';
 
+const getBaseUrl = () => {
+    let url = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/';
+    if (!url.endsWith('/')) {
+        url += '/';
+    }
+    return url;
+};
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api/',
+    baseURL: getBaseUrl(),
 });
 
 api.interceptors.request.use(
@@ -25,7 +33,7 @@ api.interceptors.response.use(
             originalRequest._retry = true;
             try {
                 const refreshToken = localStorage.getItem('refresh_token');
-                const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8000/api/'}auth/token/refresh/`, {
+                const response = await axios.post(`${getBaseUrl()}auth/token/refresh/`, {
                     refresh: refreshToken
                 });
                 const { access } = response.data;
