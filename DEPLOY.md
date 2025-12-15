@@ -53,4 +53,20 @@ python manage.py createsuperuser
 - Go back to Render Backend settings.
 - Update `CORS_ALLOWED_ORIGINS` (if you set it) or ensure `CORS_ALLOW_ALL_ORIGINS = True` (configured by default for now) to allow your Vercel frontend to connect.
 
-Your app is now live!
+
+## 5. Troubleshooting (IMPORTANT)
+
+### "Registration Failed" on Mobile/Other Devices?
+If it works on your PC but fails on other devices, it means Vercel is still trying to connect to `localhost`.
+
+**You MUST Redeploy Vercel after adding Environment Variables:**
+1.  Go to Vercel Dashboard -> Deployments.
+2.  Click the three dots `...` next to the latest deployment.
+3.  Click **Redeploy**.
+4.  Wait for it to finish.
+
+**Why?** Vercel bakes environment variables into the code *at build time*. If you added the variable after the build finished, the code doesn't know about it yet.
+
+### "Server Error" (500)?
+Did you run the `./render_start.sh` command in the Render "Start Command" setting? If not, your database is empty. See Step 2.
+
